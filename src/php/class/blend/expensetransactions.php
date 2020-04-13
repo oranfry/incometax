@@ -5,7 +5,7 @@ class expensetransactions extends \Blend
 {
     public function __construct()
     {
-        $this->label = 'Income Tax: Expenses';
+        $this->label = 'Expenses';
         $this->linetypes = ['expensetransaction',];
         $this->past = false;
         $this->cum = true;
