@@ -1,7 +1,8 @@
 <?php
 namespace linetype;
 
-use \Config;
+use Config;
+use Package;
 
 class saletransaction extends incometaxtransaction
 {
@@ -26,6 +27,9 @@ class saletransaction extends incometaxtransaction
             'supress_header' => true,
         ];
 
-        $this->clause = "t.account in (" . implode(',', array_map(function($a){ return "'$a'"; }, @Config::get()->sale_accounts ?? [])) . ")";
+        $package = Package::rget(PACKAGE_NAME);
+        $accounts = @$package->config->sale_accounts ?? ['sale'];
+
+        $this->clause = "t.account in (" . implode(',', array_map(function($a){ return "'$a'"; }, $accounts)) . ")";
     }
 }

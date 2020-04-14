@@ -2,6 +2,7 @@
 namespace linetype;
 
 use Config;
+use Package;
 
 class expensetransaction extends incometaxtransaction
 {
@@ -33,6 +34,9 @@ class expensetransaction extends incometaxtransaction
             'calc' => function($line) { return !in_array($line->account, ['bankfees']) && !$line->invoice ? 'broken' : ''; },
         ];
 
-        $this->clause = "t.account in (" . implode(',', array_map(function($a){ return "'$a'"; }, @Config::get()->expense_accounts ?? [])) . ")";
+        $package = Package::rget(PACKAGE_NAME);
+        $accounts = @$package->config->expense_accounts ?? ['expense'];
+
+        $this->clause = "t.account in (" . implode(',', array_map(function($a){ return "'$a'"; }, $accounts)) . ")";
     }
 }
