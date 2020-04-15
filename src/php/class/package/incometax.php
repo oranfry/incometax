@@ -3,8 +3,9 @@ namespace package;
 
 class incometax extends \Package
 {
-    public $label = 'Income Tax';
+    public $label = 'Income';
     public $blends = [
+        'incometaxtransactions',
         'expensetransactions',
         'saletransactions',
     ];
