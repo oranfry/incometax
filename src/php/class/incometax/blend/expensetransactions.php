@@ -1,19 +1,17 @@
 <?php
-namespace blend;
+namespace incometax\blend;
 
-use Package;
-use Linetype;
+use Config;
 
-class saletransactions extends incometaxtransactions
+class expensetransactions extends incometaxtransactions
 {
     public function __construct()
     {
         parent::__construct();
 
-        $this->label = 'Sales';
+        $this->label = 'Expenses';
 
-        $package = Package::rget('incometax');
-        $accounts = @$package->config->sale_accounts ?? ['sale'];
+        $accounts = @Config::get()->expense_accounts ?? ['expense'];
 
         $this->filters = [
             (object) [

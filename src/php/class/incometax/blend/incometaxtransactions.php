@@ -1,7 +1,7 @@
 <?php
-namespace blend;
+namespace incometax\blend;
 
-use Package;
+use Config;
 use Linetype;
 
 class incometaxtransactions extends \Blend
@@ -10,10 +10,9 @@ class incometaxtransactions extends \Blend
     {
         $this->label = 'All';
 
-        $package = Package::rget('incometax');
         $accounts = array_merge(
-            @$package->config->expense_accounts ?? ['expense'],
-            @$package->config->sale_accounts ?? ['sale']
+            @Config::get()->expense_accounts ?? ['expense'],
+            @Config::get()->sale_accounts ?? ['sale']
         );
 
         $this->filters = [
