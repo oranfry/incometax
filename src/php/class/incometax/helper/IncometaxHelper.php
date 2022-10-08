@@ -94,6 +94,10 @@ class IncometaxHelper
 
     public static function change_amount_to_net($blend)
     {
+        if (!@$blend->fields) {
+            return;
+        }
+
         $field = @filter_objects($blend->fields, 'name', 'is', 'amount')[0];
 
         if (!$field) {
